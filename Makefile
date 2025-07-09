@@ -1,4 +1,3 @@
-.PHONY: all clean test all run install_deps 
 
 all:
 	make run
