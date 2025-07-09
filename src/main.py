@@ -1,16 +1,17 @@
-from textual.app import App, ComposeResult
-from textual.containers import Horizontal
-from textual.widgets import TextArea, ListView, ListItem, Label
-from textual import events
-from textual.widget import Widget
-from textual.binding import Binding
-from textual.widgets import OptionList, Static
-from rich.text import Text
 import ast
 import operator as op
 import re
+import statistics
+
 import pyperclip
-import statistics 
+from rich.text import Text
+from textual import events
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import Horizontal
+from textual.widget import Widget
+from textual.widgets import Label, ListItem, ListView, OptionList, Static, TextArea
+
 
 class ClickableFooterItem(Static):
     def __init__(self, label: str, id: str, on_click=None):
@@ -20,6 +21,7 @@ class ClickableFooterItem(Static):
     def on_click(self) -> None:
         if self.on_click_handler:
             self.on_click_handler()
+
 
 class CustomFooter(Horizontal):
     DEFAULT_CSS = """
@@ -44,13 +46,14 @@ class CustomFooter(Horizontal):
 
     def __init__(self, items):
         super().__init__()
-        self.items = items 
+        self.items = items
 
     def add_item(self, label: str, id: str, on_click=None):
         self.items.append((label, id, on_click))
 
     def compose(self) -> ComposeResult:
         yield from self.items
+
 
 class Calculator(App):
     CSS = """
@@ -84,21 +87,30 @@ class Calculator(App):
         Binding(key="l", action="copy_line_var", description="copy var"),
         Binding(key="tab", action="toggle_focus", description="focus", priority=True),
         Binding(key="ctrl+x", action="toggle_hex", description="hex", priority=True),
-        Binding(key="ctrl+b", action="toggle_binary", description="bin")
+        Binding(key="ctrl+b", action="toggle_binary", description="bin"),
     ]
-    
 
     def __init__(self):
         super().__init__()
         self.lines = {}
-        self.output_base = 10 
+        self.output_base = 10
         self.current_calculation = "sum"
 
     def compose(self) -> ComposeResult:
         footer_items = []
         for binding in self.BINDINGS:
-            footer_items.append(ClickableFooterItem(f"{binding.key}: {binding.description}", binding.action))
-        footer_items.append(ClickableFooterItem(self.get_calculation_text(), "calculation", on_click=self.toggle_calculation_options))
+            footer_items.append(
+                ClickableFooterItem(
+                    f"{binding.key}: {binding.description}", binding.action
+                )
+            )
+        footer_items.append(
+            ClickableFooterItem(
+                self.get_calculation_text(),
+                "calculation",
+                on_click=self.toggle_calculation_options,
+            )
+        )
 
         yield CustomFooter(footer_items)
         with Horizontal():
@@ -115,20 +127,24 @@ class Calculator(App):
         if self.query("#calculation_options"):
             self.query_one("#calculation_options").remove()
         else:
-            option_list = OptionList("Sum", "Average", "Median", "Min", "Max", id="calculation_options")
+            option_list = OptionList(
+                "Sum", "Average", "Median", "Min", "Max", id="calculation_options"
+            )
             option_list.focus()
             self.mount(option_list)
 
     def on_option_list_option_selected(self, event: OptionList.OptionSelected):
         self.current_calculation = event.option.prompt.lower()
         self.query_one("#calculation_options").remove()
-        self.query_one("ClickableFooterItem#calculation").update(self.get_calculation_text())
+        self.query_one("ClickableFooterItem#calculation").update(
+            self.get_calculation_text()
+        )
 
     def get_calculation_text(self):
         values = list(self.lines.values())
         if not values:
             return f"{self.current_calculation} = 0"
-        
+
         if self.current_calculation == "sum":
             result = sum(values)
         elif self.current_calculation == "average":
@@ -139,7 +155,7 @@ class Calculator(App):
             result = min(values)
         elif self.current_calculation == "max":
             result = max(values)
-        
+
         return f"{self.current_calculation} = {result:.2f}"
 
     def on_text_area_changed(self, event: TextArea.Changed) -> None:
@@ -147,7 +163,7 @@ class Calculator(App):
             self.calculate()
 
     def sync_input_cursor(self, index):
-        if index is not None and 0 <= index < len(self.input.text.split('\n')):
+        if index is not None and 0 <= index < len(self.input.text.split("\n")):
             self.input.move_cursor((index, 0))
 
     def action_paste(self):
@@ -157,7 +173,7 @@ class Calculator(App):
         if self.input.has_focus:
             self.output.focus()
             cursor_line, _ = self.input.cursor_location
-            self.output.index = cursor_line      
+            self.output.index = cursor_line
         elif self.output.has_focus:
             self.input.focus()
 
@@ -173,7 +189,7 @@ class Calculator(App):
         if self.output.has_focus:
             selected = self.output.highlighted_child
             if selected:
-                text = selected.children[0].render() 
+                text = selected.children[0].render()
                 pyperclip.copy(text)
                 self.notify(f"Copied '{text}' to clipboard")
 
@@ -181,7 +197,7 @@ class Calculator(App):
         if self.output.has_focus:
             selected = self.output.highlighted_child
             if selected:
-                text = str(self.output.index+1)
+                text = str(self.output.index + 1)
                 pyperclip.copy(f"line{text}")
                 self.notify(f"Copied 'line{text}' to clipboard")
 
@@ -196,9 +212,9 @@ class Calculator(App):
         for i, line in enumerate(input_lines):
             try:
                 result = self.evaluate(line)
-                self.lines[f"line{i+1}"] = result
+                self.lines[f"line{i + 1}"] = result
                 formatted_result = self.format_result(result)
-                
+
                 if i < len(current_items):
                     # Update existing ListItem's Label
                     current_items[i].children[0].update(formatted_result)
@@ -218,18 +234,22 @@ class Calculator(App):
             remove_indices = list(range(len(new_items), len(current_items)))
             self.output.remove_items(remove_indices)
         else:
-            self.output.extend(new_items[len(current_items):])
+            self.output.extend(new_items[len(current_items) :])
 
         cursor_line, _ = self.input.cursor_location
-        self.output.index = cursor_line      
-        self.query_one("ClickableFooterItem#calculation").update(self.get_calculation_text())
+        self.output.index = cursor_line
+        self.query_one("ClickableFooterItem#calculation").update(
+            self.get_calculation_text()
+        )
 
     def evaluate(self, expr):
         def eval_expr(node):
             if isinstance(node, ast.Num):
                 return node.n
             elif isinstance(node, ast.BinOp):
-                return operators[type(node.op)](eval_expr(node.left), eval_expr(node.right))
+                return operators[type(node.op)](
+                    eval_expr(node.left), eval_expr(node.right)
+                )
             elif isinstance(node, ast.UnaryOp):
                 return operators[type(node.op)](eval_expr(node.operand))
             elif isinstance(node, ast.Name):
@@ -246,17 +266,25 @@ class Calculator(App):
                 raise ValueError(f"Unsupported node type: {type(node)}")
 
         operators = {
-            ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul,
-            ast.Div: op.truediv, ast.Pow: op.pow, ast.BitXor: op.xor,
-            ast.USub: op.neg, ast.LShift: op.lshift, ast.RShift: op.rshift,
-            ast.BitOr: op.or_, ast.BitAnd: op.and_, ast.Invert: op.invert
+            ast.Add: op.add,
+            ast.Sub: op.sub,
+            ast.Mult: op.mul,
+            ast.Div: op.truediv,
+            ast.Pow: op.pow,
+            ast.BitXor: op.xor,
+            ast.USub: op.neg,
+            ast.LShift: op.lshift,
+            ast.RShift: op.rshift,
+            ast.BitOr: op.or_,
+            ast.BitAnd: op.and_,
+            ast.Invert: op.invert,
         }
 
         def parse_number(match):
             num = match.group(0)
-            if num.startswith('0x'):
+            if num.startswith("0x"):
                 return str(int(num, 16))
-            elif num.startswith('0b'):
+            elif num.startswith("0b"):
                 return str(int(num, 2))
             return num
 
@@ -270,21 +298,19 @@ class Calculator(App):
         def to_dec(x):
             return int(x)
 
-        custom_functions = {
-            "bin": to_bin,
-            "hex": to_hex,
-            "dec": to_dec
-        }
+        custom_functions = {"bin": to_bin, "hex": to_hex, "dec": to_dec}
 
         # Replace number literals with their decimal equivalents
-        expr = re.sub(r'\b(0x[0-9a-fA-F]+|0b[01]+|\d+)\b', parse_number, expr)
-        
+        expr = re.sub(r"\b(0x[0-9a-fA-F]+|0b[01]+|\d+)\b", parse_number, expr)
+
         if not expr.strip():
             raise ValueError("Empty expression")
 
-        tree = ast.parse(expr, mode='eval')
+        tree = ast.parse(expr, mode="eval")
         result = eval_expr(tree.body)
-        return int(result) if isinstance(result, float) and result.is_integer() else result
+        return (
+            int(result) if isinstance(result, float) and result.is_integer() else result
+        )
 
     def format_result(self, result):
         if isinstance(result, int):
@@ -296,6 +322,7 @@ class Calculator(App):
             # For bin() and hex() results
             return result
         return str(result)
+
 
 if __name__ == "__main__":
     app = Calculator()
