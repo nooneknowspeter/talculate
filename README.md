@@ -2,7 +2,8 @@
 
 A programmer oriented tui calculator. simple keys. minimal ui.
 
-![talc](talc.gif)
+![talc](public/preview.gif)
+
 
 ```
 pip install textual pyperclip
@@ -10,6 +11,8 @@ python talc.py
 ```
 
 Run the calculator, type number, see results.
+
+## Keybindings
 
 - `q`: Quit
 - `v`: Paste
