@@ -12,6 +12,9 @@ python src/main.py
 ```
 
 or using Make
+
+```sh
+make all
 ```
 
 Run the calculator, type number, see results.
