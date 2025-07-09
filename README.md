@@ -4,10 +4,14 @@ A programmer oriented tui calculator. simple keys. minimal ui.
 
 ![talc](public/preview.gif)
 
+## Run
 
+```sh
+pip install -r requirements.txt
+python src/main.py
 ```
-pip install textual pyperclip
-python talc.py
+
+or using Make
 ```
 
 Run the calculator, type number, see results.
