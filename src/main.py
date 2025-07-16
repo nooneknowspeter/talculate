@@ -27,15 +27,12 @@ class CustomFooter(Horizontal):
     DEFAULT_CSS = """
     CustomFooter {
         width: 100%;
-        background: $surface;
-        color: $text;
         height: 1;
         layout: grid;
         grid-size: 8;
         grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }
     ClickableFooterItem {
-        color: $text;
         padding: 0 1;
         height: 1;
     }
@@ -62,13 +59,11 @@ class Calculator(App):
     TextArea {
         width: 50%;
         height: 100%;
-        border: solid green;
         scrollbar-size: 1 1;
     }
     ListView {
         width: 50%;
         height: 100%;
-        border: solid green;
         scrollbar-size: 1 1;
     }
     CustomFooter {
