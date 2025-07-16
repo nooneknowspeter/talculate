@@ -151,6 +151,7 @@ class Calculator(App):
         self.output = self.query_one("#output", ListView)
         self.footer = self.query_one(CustomFooter)
         self.calculate()
+        self.register_theme(user_custom_theme)
         self.theme = user_selected_theme
 
     def toggle_calculation_options(self):

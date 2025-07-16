@@ -1,4 +1,5 @@
 import yaml
+from textual.theme import Theme
 
 from paths import config_file_path, theme_file_path
 
@@ -29,3 +30,20 @@ with open(file=config_file_path, mode="r") as file:
     if not config_file["theme"] is None:
         user_selected_theme = config_file["theme"]
 
+with open(file=theme_file_path, mode="r") as file:
+    theme_file = yaml.safe_load(file)
+
+    user_custom_theme = Theme(
+        name=theme_file["name"],
+        primary=theme_file["primary"],
+        secondary=theme_file["secondary"],
+        accent=theme_file["accent"],
+        foreground=theme_file["foreground"],
+        background=theme_file["background"],
+        success=theme_file["success"],
+        warning=theme_file["warning"],
+        error=theme_file["error"],
+        surface=theme_file["surface"],
+        panel=theme_file["panel"],
+        dark=theme_file["dark"],
+    )
