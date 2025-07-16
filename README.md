@@ -4,7 +4,7 @@ A programmer oriented tui calculator. simple keys. minimal ui.
 
 ![talc](public/preview.gif)
 
-## Run
+## Setup
 
 ```sh
 pip install -r requirements.txt
@@ -19,7 +19,7 @@ make all
 
 Run the calculator, type number, see results.
 
-## Keybindings
+## Default Keybindings
 
 - `q`: Quit
 - `v`: Paste
