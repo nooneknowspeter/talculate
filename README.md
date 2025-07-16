@@ -6,15 +6,37 @@ A programmer oriented tui calculator. simple keys. minimal ui.
 
 ## Setup
 
+> [!NOTE]
+>
+> Ensure that you create and source a virtual environment `python -m venv venv`
+> to prevent the global installation of packages
+>
+> [PEP 668](https://peps.python.org/pep-0668/)
+
+### Generic
+
 ```sh
 pip install -r requirements.txt
 python src/main.py
 ```
 
-or using Make
+### Using Make
 
 ```sh
-make all
+make install_deps
+make
+```
+
+### Using Nix Development Shell
+
+> [!NOTE]
+>
+> If `direnv` is installed, you can use `direnv allow` inside the project directory instead of the `nix develop`.
+
+```sh
+nix --extra-experimental-features "nix-command flakes" develop
+make install_deps
+make
 ```
 
 Run the calculator, type number, see results.
@@ -54,8 +76,7 @@ $env:LOCALAPPDATA\talculate
 ### Default Configuration
 
 Values can be ommited but the keys cannot.
-
-`config.yaml` uses default values when ommited
+`config.yaml` uses default values when ommited.
 
 ```yaml
 bindings:
@@ -74,7 +95,7 @@ theme:
 > [!NOTE]
 >
 > `textual-dark` is the default theme.
-> You can use a pre-defined theme in the `config.yaml`
+> You can use a pre-defined theme in the `config.yaml`.
 >
 > ```yaml
 > theme: "name-of-theme"
@@ -116,7 +137,7 @@ theme:
 #### Custom Theme
 
 If you want use a custom theme,
-the name value in `theme.yaml` must match the theme value in `config.yaml`
+the name value in `theme.yaml` must match the theme value in `config.yaml`.
 
 `theme.yaml`
 
