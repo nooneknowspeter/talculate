@@ -11,3 +11,6 @@ if sys.platform == "win32":
 else:
     talc_config_folder_path = os.path.join(xdg_config_home, "talculate")
 
+if not os.path.exists(talc_config_folder_path):
+    os.mkdir(talc_config_folder_path)
+
