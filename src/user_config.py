@@ -24,3 +24,8 @@ with open(file=config_file_path, mode="r") as file:
         )
     }
 
+    user_selected_theme = "textual-dark"
+
+    if not config_file["theme"] is None:
+        user_selected_theme = config_file["theme"]
+

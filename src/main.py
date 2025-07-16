@@ -12,6 +12,8 @@ from textual.containers import Horizontal
 from textual.widget import Widget
 from textual.widgets import Label, ListItem, ListView, OptionList, Static, TextArea
 
+from user_config import user_config_bindings, user_custom_theme, user_selected_theme
+
 
 class ClickableFooterItem(Static):
     def __init__(self, label: str, id: str, on_click=None):
@@ -149,6 +151,7 @@ class Calculator(App):
         self.output = self.query_one("#output", ListView)
         self.footer = self.query_one(CustomFooter)
         self.calculate()
+        self.theme = user_selected_theme
 
     def toggle_calculation_options(self):
         if self.query("#calculation_options"):
