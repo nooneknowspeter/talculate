@@ -1,0 +1,10 @@
+# default config
+bindings:
+  quit: "q"
+  paste: "v"
+  copy_selected: "c"
+  copy_line_var: "l"
+  toggle_focus: "tab"
+  toggle_hex: "ctrl+x"
+  toggle_binary: "ctrl+b"
+theme:
