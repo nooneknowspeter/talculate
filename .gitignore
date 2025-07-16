@@ -1,1 +1,4 @@
 .direnv
+
+# python artifacts
+__pycache__
