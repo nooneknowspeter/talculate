@@ -76,13 +76,45 @@ class Calculator(App):
     }
     """
     BINDINGS = [
-        Binding(key="q", action="quit", description="quit", priority=True),
-        Binding(key="v", action="paste", description="paste", priority=True),
-        Binding(key="c", action="copy_selected", description="copy val"),
-        Binding(key="l", action="copy_line_var", description="copy var"),
-        Binding(key="tab", action="toggle_focus", description="focus", priority=True),
-        Binding(key="ctrl+x", action="toggle_hex", description="hex", priority=True),
-        Binding(key="ctrl+b", action="toggle_binary", description="bin"),
+        Binding(
+            key=user_config_bindings["quit"],
+            action="quit",
+            description="quit",
+            priority=True,
+        ),
+        Binding(
+            key=user_config_bindings["paste"],
+            action="paste",
+            description="paste",
+            priority=True,
+        ),
+        Binding(
+            key=user_config_bindings["copy_selected"],
+            action="copy_selected",
+            description="copy val",
+        ),
+        Binding(
+            key=user_config_bindings["copy_line_var"],
+            action="copy_line_var",
+            description="copy var",
+        ),
+        Binding(
+            key=user_config_bindings["toggle_focus"],
+            action="toggle_focus",
+            description="focus",
+            priority=True,
+        ),
+        Binding(
+            key=user_config_bindings["toggle_hex"],
+            action="toggle_hex",
+            description="hex",
+            priority=True,
+        ),
+        Binding(
+            key=user_config_bindings["toggle_binary"],
+            action="toggle_binary",
+            description="bin",
+        ),
     ]
 
     def __init__(self):
