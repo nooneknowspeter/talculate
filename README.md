@@ -4,6 +4,19 @@ A programmer oriented tui calculator. simple keys. minimal ui.
 
 ![talc](public/preview.gif)
 
+## Installations
+
+The application has not been distributed as a package yet (WIP).
+If you would like to use you need to clone it and follow the [setup guide](#setup).
+
+### Arch
+
+Soon
+
+### NixOS
+
+Soon
+
 ## Setup
 
 > [!NOTE]
