@@ -22,9 +22,24 @@ Soon
 > [!NOTE]
 >
 > Ensure that you create and source a virtual environment `python -m venv venv`
-> to prevent the global installation of packages
+> to prevent the global installation of packages.
 >
 > [PEP 668](https://peps.python.org/pep-0668/)
+
+### Poetry
+
+The project utilizes [poetry](https://python-poetry.org/).
+
+> [!NOTE]
+>
+> Poetry is available in project's development shell.
+>
+> If `direnv` is installed, you can use `direnv allow` inside the project directory instead of the `nix develop`.
+
+```sh
+poetry install
+poetry run talc
+```
 
 ### Generic
 
@@ -33,14 +48,14 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-### Using Make
+#### Using Make
 
 ```sh
 make install_deps
 make
 ```
 
-### Using Nix Development Shell
+#### Using Nix Development Shell
 
 > [!NOTE]
 >
