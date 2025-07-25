@@ -27,3 +27,6 @@ build-backend = "poetry.core.masonry.api"
 package-mode = true
 packages = [{ include = "talculate", from = "src" }]
 
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^6.14.2"
+
