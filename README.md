@@ -19,13 +19,6 @@ Soon
 
 ## Setup
 
-> [!NOTE]
->
-> Ensure that you create and source a virtual environment `python -m venv venv`
-> to prevent the global installation of packages.
->
-> [PEP 668](https://peps.python.org/pep-0668/)
-
 ### Poetry
 
 The project utilizes [poetry](https://python-poetry.org/).
@@ -34,7 +27,7 @@ The project utilizes [poetry](https://python-poetry.org/).
 >
 > Poetry is available in project's development shell.
 >
-> If `direnv` is installed, you can use `direnv allow` inside the project directory instead of the `nix develop`.
+> If `direnv` is installed, you can use `direnv allow` inside the project directory instead of `nix develop`.
 
 ```sh
 poetry install
@@ -42,6 +35,13 @@ poetry run talc
 ```
 
 ### Generic
+
+> [!NOTE]
+>
+> Ensure that you create and source a virtual environment `python -m venv venv`
+> to prevent the global installation of packages.
+>
+> [PEP 668](https://peps.python.org/pep-0668/)
 
 ```sh
 pip install -r requirements.txt
@@ -59,7 +59,7 @@ make
 
 > [!NOTE]
 >
-> If `direnv` is installed, you can use `direnv allow` inside the project directory instead of the `nix develop`.
+> If `direnv` is installed, you can use `direnv allow` inside the project directory instead of `nix develop`.
 
 ```sh
 nix --extra-experimental-features "nix-command flakes" develop
