@@ -14,11 +14,9 @@
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ python3 gnumake ];
+          packages = with pkgs; [ poetry python3 gnumake ];
           shellHook = ''
-            ${pkgs.python3}/bin/python -m venv .venv
-            source .venv/bin/activate
-            pip install -r requirements.txt
+            export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
           '';
         };
       });
