@@ -3,7 +3,7 @@ name = "talculate"
 version = "0.2.0"
 description = "A programmer oriented tui calculator. simple keys. minimal ui"
 readme = "README.md"
-requires-python = ">=3.12,<4.0.0"
+requires-python = ">=3.12,<3.14.0"
 authors = [
   { name = "nooneknows", email = "157999171+nooneknowspeter@users.noreply.github.com" },
 ]
