@@ -1,58 +1,42 @@
 { lib
-, stdenv
+, python3
 , fetchFromGitHub
-, makeWrapper
-, pkg-config
-, python3Packages
 ,
 }:
 
-stdenv.mkDerivation rec {
+python3.pkgs.buildPythonApplication rec {
   pname = "talculate";
-  version = "unstable-2025-07-16";
+  version = "unstable-2025-07-25";
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "nooneknowspeter";
     repo = "talculate";
-    rev = "385270d881cd0ab20a7c4c0bfecf7106f72f0f10";
-    hash = "sha256-uC6VX2cD+aY3aMt+2dOy5OhpmQEO1a2L+3vhl6z3J50=";
+    rev = "c11ff5e70713adaac775efe75be821635d661d73";
+    hash = "sha256-5kEpZt2DIgYnAnaMpyLUcCaLMr8o5bf0X3jmNL/9wx0=";
   };
 
-  nativeBuildInputs = [
-    makeWrapper
-    pkg-config
-    python3Packages.wrapPython
+  build-system = [
+    python3.pkgs.poetry-core
   ];
 
-  buildInputs = with python3Packages; [
-    python
-    linkify-it-py
-    markdown-it-py
-    mdit-py-plugins
-    mdurl
-    platformdirs
-    pygments
+  dependencies = with python3.pkgs; [
     pyperclip
     pyyaml
     rich
     textual
-    typing-extensions
-    uc-micro-py
     xdg
   ];
 
-  postInstall = ''
-    wrapPythonPrograms
-  '';
+  pythonImportsCheck = [
+    "talculate"
+  ];
 
   meta = {
     description = "A programmer oriented tui calculator. simple keys. minimal ui";
     homepage = "https://github.com/nooneknowspeter/talculate";
     license = lib.licenses.unfree;
-    maintainers = with lib.maintainers; [
-      nooneknowspeter
-    ];
+    maintainers = with lib.maintainers; [ nooneknowspeter ];
     mainProgram = "talculate";
-    platforms = lib.platforms.all;
   };
 }
