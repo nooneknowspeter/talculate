@@ -12,7 +12,11 @@ from textual.containers import Horizontal
 from textual.widget import Widget
 from textual.widgets import Label, ListItem, ListView, OptionList, Static, TextArea
 
-from user_config import user_config_bindings, user_custom_theme, user_selected_theme
+from talculate.user_config import (
+    user_config_bindings,
+    user_custom_theme,
+    user_selected_theme,
+)
 
 
 class ClickableFooterItem(Static):
@@ -355,6 +359,10 @@ class Calculator(App):
         return str(result)
 
 
-if __name__ == "__main__":
+def run():
     app = Calculator()
     app.run()
+
+
+if __name__ == "__main__":
+    run()

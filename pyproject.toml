@@ -15,6 +15,14 @@ dependencies = [
   "xdg (==6.0.0)",
 ]
 
+[project.scripts]
+talc = "talculate.main:run"
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = true
+packages = [{ include = "talculate", from = "src" }]
+

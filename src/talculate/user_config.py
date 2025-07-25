@@ -1,7 +1,7 @@
 import yaml
 from textual.theme import Theme
 
-from paths import config_file_path, theme_file_path
+from talculate.paths import config_file_path, theme_file_path
 
 default_bindings = {
     "quit": "q",
