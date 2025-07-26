@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🎨 Styling
+
+- Nixfmt flake.nix
+
 ### ⚙️ Miscellaneous Tasks
 
 - *(ci/cd)* Add workflow to generate CHANGELOG.md
@@ -26,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - Add treefmt config
 - *(ci/cd)* Update CHANGELOG.md
 - *(nix)* Add package.nix
+- *(ci/cd)* Update CHANGELOG.md
 
 ## [0.2.0] - 2025-07-25
 
