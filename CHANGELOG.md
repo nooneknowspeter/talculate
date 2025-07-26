@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 - *(nix)* Update flake.nix description
 - *(nix)* Add packages attribute to flake.nix
 - *(nix)* Add apps attribute to flake.nix
+- *(ci/cd)* Update CHANGELOG.md
+- Add treefmt config
 
 ## [0.2.0] - 2025-07-25
 
