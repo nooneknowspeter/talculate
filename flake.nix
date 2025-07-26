@@ -10,6 +10,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
+        packages = { default = pkgs.callPackage ./package.nix { }; };
+
         devShells = {
           default = pkgs.mkShell {
             packages = with pkgs; [
