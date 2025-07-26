@@ -1,5 +1,5 @@
 {
-  description = "development dependencies";
+  description = "talculate";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
