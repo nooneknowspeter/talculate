@@ -14,6 +14,14 @@ All notable changes to this project will be documented in this file.
 - Add pyinstaller to dev dependencies
 - *(ci/cd)* Update CHANGELOG.md
 - *(ci/cd)* Disable prereleases in publish-release workflow
+- *(ci/cd)* Update CHANGELOG.md
+- Change workflow extensions to yaml
+- *(ci/cd)* Add treefmt workflow
+- *(nix)* Add flake-utils to inputs
+- *(nix)* Wrap devShell in flake-utils
+- *(nix)* Update flake.nix description
+- *(nix)* Add packages attribute to flake.nix
+- *(nix)* Add apps attribute to flake.nix
 
 ## [0.2.0] - 2025-07-25
 
