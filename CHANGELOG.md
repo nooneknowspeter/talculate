@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file.
 - *(ci/cd)* Add workflow for building cross-platform binaries
 - Change required python version range to 3.12-3.14
 - Add pyinstaller to dev dependencies
+- *(ci/cd)* Update CHANGELOG.md
+- *(ci/cd)* Disable prereleases in publish-release workflow
 
 ## [0.2.0] - 2025-07-25
 
