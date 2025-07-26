@@ -12,6 +12,13 @@
       in {
         packages = { default = pkgs.callPackage ./package.nix { }; };
 
+        apps = {
+          default = {
+            type = "app";
+            program = "${self.packages.${system}.default}/bin/talc";
+          };
+        };
+
         devShells = {
           default = pkgs.mkShell {
             packages = with pkgs; [
