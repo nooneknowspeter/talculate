@@ -1,0 +1,14 @@
+# The formatter multiplexer - https://github.com/numtide/treefmt
+
+[formatter.black]
+command = "black"
+excludes = []
+includes = ["*.py", "*.pyi"]
+options = []
+
+[formatter.nixfmt-rfc-style]
+command = "nixfmt"
+options = []
+includes = ["*.nix"]
+excludes = []
+priority = 0
